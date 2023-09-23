@@ -1,0 +1,79 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://resources/theme.tres" type="Theme" id=1]
+[ext_resource path="res://scenes/UI/AnimatedButton.gd" type="Script" id=2]
+[ext_resource path="res://assets/sounds/curated_sounds/click_002.ogg" type="AudioStream" id=3]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Hover"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_min_size")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 96, 24 ), Vector2( 112, 24 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rect_size")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 96, 24 ), Vector2( 112, 24 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "click"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 5.0, -3.0, 0.0 ]
+}
+
+[node name="AnimatedButton" type="Button" groups=[
+"animated_button",
+]]
+pause_mode = 2
+margin_right = 112.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 112, 24 )
+rect_pivot_offset = Vector2( 48, 12 )
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme = ExtResource( 1 )
+text = "Continuar"
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HoverAnimationPlayer" type="AnimationPlayer" parent="."]
+pause_mode = 2
+anims/Hover = SubResource( 1 )
+
+[node name="ClickAnimationPlayer" type="AnimationPlayer" parent="."]
+pause_mode = 2
+anims/click = SubResource( 2 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+pause_mode = 2
+stream = ExtResource( 3 )
+bus = "SFX"

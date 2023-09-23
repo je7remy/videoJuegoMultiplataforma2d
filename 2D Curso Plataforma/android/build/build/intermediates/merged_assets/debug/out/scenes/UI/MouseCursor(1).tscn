@@ -1,0 +1,58 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://assets/UI/UIpackSheet_transparent.png" type="Texture" id=1]
+[ext_resource path="res://scenes/UI/MouseCursor.gd" type="Script" id=2]
+
+[sub_resource type="Animation" id=1]
+resource_name = "click"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1.6, 1.6 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 576, 9, 13 )
+
+[sub_resource type="Shader" id=3]
+code = "shader_type canvas_item;
+
+void fragment(){
+	vec4 textColor = texture(TEXTURE, UV);
+	
+	COLOR.rgba = vec4(0 , 0 , 0 , textColor.a * .5);
+}"
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = SubResource( 3 )
+
+[node name="MouseCursor" type="CanvasLayer"]
+pause_mode = 2
+layer = 100
+script = ExtResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/click = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+visible = false
+position = Vector2( -8, 0 )
+scale = Vector2( 1.6, 1.6 )
+texture = SubResource( 2 )
+centered = false
+
+[node name="Sprite2" type="Sprite" parent="Sprite"]
+show_behind_parent = true
+material = SubResource( 4 )
+position = Vector2( 1, 1 )
+texture = SubResource( 2 )
+centered = false

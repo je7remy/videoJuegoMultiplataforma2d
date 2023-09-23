@@ -1,0 +1,133 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://flag/tile_0131.png" type="Texture" id=1]
+[ext_resource path="res://flag/tile_0111.png" type="Texture" id=2]
+[ext_resource path="res://flag/tile_0112.png" type="Texture" id=3]
+[ext_resource path="res://scenes/Flag.gd" type="Script" id=4]
+[ext_resource path="res://assets/effects/confetti.png" type="Texture" id=5]
+[ext_resource path="res://assets/sounds/curated_sounds/jingles_PIZZI10.ogg" type="AudioStream" id=6]
+[ext_resource path="res://assets/sounds/impactPlank_medium_001.ogg" type="AudioStream" id=7]
+[ext_resource path="res://assets/sounds/impactPlank_medium_000.ogg" type="AudioStream" id=8]
+[ext_resource path="res://assets/sounds/impactPlank_medium_004.ogg" type="AudioStream" id=9]
+[ext_resource path="res://assets/sounds/impactPlank_medium_002.ogg" type="AudioStream" id=10]
+[ext_resource path="res://assets/sounds/impactPlank_medium_003.ogg" type="AudioStream" id=11]
+[ext_resource path="res://scenes/Util/RandomAudioStreamPlayer.tscn" type="PackedScene" id=12]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 16, 24 )
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "default",
+"speed": 10.0
+} ]
+
+[sub_resource type="CanvasItemMaterial" id=3]
+particles_animation = true
+particles_anim_h_frames = 2
+particles_anim_v_frames = 1
+particles_anim_loop = true
+
+[sub_resource type="Curve" id=4]
+max_value = 300.0
+_data = [ Vector2( 0, 300 ), 0.0, 0.0, 0, 0, Vector2( 0.290076, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=5]
+curve = SubResource( 4 )
+
+[sub_resource type="Curve" id=6]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.0267176, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.328622, 0.783708 ), 0.0, 0.0, 0, 0, Vector2( 0.64311, 0.783708 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=7]
+curve = SubResource( 6 )
+
+[sub_resource type="ParticlesMaterial" id=8]
+emission_shape = 1
+emission_sphere_radius = 5.0
+flag_disable_z = true
+direction = Vector3( 0, -1, 0 )
+spread = 30.0
+gravity = Vector3( 0, 50, 0 )
+initial_velocity = 200.0
+initial_velocity_random = 0.25
+angular_velocity = 360.0
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+damping_curve = SubResource( 5 )
+scale = 1.5
+scale_random = 1.0
+scale_curve = SubResource( 7 )
+color = Color( 0.184314, 0.282353, 0.270588, 1 )
+hue_variation = 1.0
+hue_variation_random = 1.0
+anim_speed = 5.0
+anim_speed_random = 0.5
+anim_offset = 1.0
+anim_offset_random = 1.0
+
+[node name="Flag" type="Node2D"]
+script = ExtResource( 4 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+bus = "SFX"
+
+[node name="RandomAudioStreamPlayer" parent="." instance=ExtResource( 12 )]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="RandomAudioStreamPlayer"]
+stream = ExtResource( 8 )
+volume_db = 5.0
+bus = "SFX"
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="RandomAudioStreamPlayer"]
+stream = ExtResource( 7 )
+volume_db = 5.0
+bus = "SFX"
+
+[node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="RandomAudioStreamPlayer"]
+stream = ExtResource( 10 )
+volume_db = 5.0
+bus = "SFX"
+
+[node name="AudioStreamPlayer4" type="AudioStreamPlayer" parent="RandomAudioStreamPlayer"]
+stream = ExtResource( 11 )
+volume_db = 5.0
+bus = "SFX"
+
+[node name="AudioStreamPlayer5" type="AudioStreamPlayer" parent="RandomAudioStreamPlayer"]
+stream = ExtResource( 9 )
+volume_db = 5.0
+bus = "SFX"
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 524288
+collision_mask = 524288
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 8, -24 )
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+centered = false
+offset = Vector2( 0, -18 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0, -36 )
+frames = SubResource( 2 )
+playing = true
+centered = false
+
+[node name="Particles2D" type="Particles2D" parent="."]
+material = SubResource( 3 )
+position = Vector2( 3, -9 )
+emitting = false
+amount = 25
+lifetime = 3.0
+explosiveness = 0.9
+randomness = 0.5
+process_material = SubResource( 8 )
+texture = ExtResource( 5 )

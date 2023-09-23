@@ -1,0 +1,203 @@
+[gd_scene load_steps=25 format=2]
+
+[ext_resource path="res://scenes/Player.gd" type="Script" id=1]
+[ext_resource path="res://assets/Player/character_0000.png" type="Texture" id=2]
+[ext_resource path="res://assets/Player/character_0001.png" type="Texture" id=3]
+[ext_resource path="res://scenes/Util/RandomAudioStreamPlayer.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/sounds/footstep_grass_004.ogg" type="AudioStream" id=5]
+[ext_resource path="res://assets/sounds/footstep_grass_000.ogg" type="AudioStream" id=6]
+[ext_resource path="res://assets/sounds/footstep_grass_002.ogg" type="AudioStream" id=7]
+[ext_resource path="res://assets/sounds/footstep_grass_003.ogg" type="AudioStream" id=8]
+[ext_resource path="res://assets/sounds/footstep_grass_001.ogg" type="AudioStream" id=9]
+[ext_resource path="res://assets/sounds/footstep_concrete_001.ogg" type="AudioStream" id=10]
+[ext_resource path="res://assets/sounds/footstep_concrete_002.ogg" type="AudioStream" id=11]
+[ext_resource path="res://assets/sounds/footstep_concrete_000.ogg" type="AudioStream" id=12]
+[ext_resource path="res://assets/sounds/footstep_concrete_003.ogg" type="AudioStream" id=13]
+[ext_resource path="res://assets/sounds/impactBell_heavy_004.ogg" type="AudioStream" id=14]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform vec4 baseColor : hint_color;
+
+void fragment(){
+	vec4 textColor = texture(TEXTURE, UV);
+	COLOR.rgba = vec4(baseColor.r, baseColor.g, baseColor.b, textColor.a);
+	//COLOR.rgb = vec3(0.0, 0.0, 0.0);
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/baseColor = Color( 0.352941, 0.823529, 0.54902, 1 )
+
+[sub_resource type="Curve" id=3]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.216049, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=4]
+curve = SubResource( 3 )
+
+[sub_resource type="ParticlesMaterial" id=5]
+flag_disable_z = true
+spread = 45.49
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale_curve = SubResource( 4 )
+
+[sub_resource type="CircleShape2D" id=6]
+radius = 13.0
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 8, 12 )
+
+[sub_resource type="SpriteFrames" id=8]
+animations = [ {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "jump",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "run",
+"speed": 10.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 10, 12 )
+
+[sub_resource type="CapsuleShape2D" id=10]
+radius = 11.0
+height = 7.0
+
+[node name="Player" type="KinematicBody2D" groups=[
+"player",
+]]
+collision_layer = 0
+script = ExtResource( 1 )
+dashHazardMask = 262144
+
+[node name="FootstepAudioPlayer" parent="." instance=ExtResource( 4 )]
+numberToPlay = 3
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="FootstepAudioPlayer"]
+stream = ExtResource( 6 )
+volume_db = 4.0
+bus = "Footsteps"
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="FootstepAudioPlayer"]
+stream = ExtResource( 9 )
+volume_db = 4.0
+bus = "Footsteps"
+
+[node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="FootstepAudioPlayer"]
+stream = ExtResource( 7 )
+volume_db = 4.0
+bus = "Footsteps"
+
+[node name="AudioStreamPlayer4" type="AudioStreamPlayer" parent="FootstepAudioPlayer"]
+stream = ExtResource( 8 )
+volume_db = 4.0
+bus = "Footsteps"
+
+[node name="AudioStreamPlayer5" type="AudioStreamPlayer" parent="FootstepAudioPlayer"]
+stream = ExtResource( 5 )
+volume_db = 4.0
+bus = "Footsteps"
+
+[node name="AudioStreamPlayer6" type="AudioStreamPlayer" parent="FootstepAudioPlayer"]
+stream = ExtResource( 12 )
+volume_db = 4.0
+bus = "Footsteps"
+
+[node name="AudioStreamPlayer7" type="AudioStreamPlayer" parent="FootstepAudioPlayer"]
+stream = ExtResource( 10 )
+volume_db = 4.0
+bus = "Footsteps"
+
+[node name="AudioStreamPlayer8" type="AudioStreamPlayer" parent="FootstepAudioPlayer"]
+stream = ExtResource( 11 )
+volume_db = 4.0
+bus = "Footsteps"
+
+[node name="AudioStreamPlayer9" type="AudioStreamPlayer" parent="FootstepAudioPlayer"]
+stream = ExtResource( 13 )
+volume_db = 4.0
+bus = "Footsteps"
+
+[node name="AudioStreamPlayer10" type="AudioStreamPlayer" parent="FootstepAudioPlayer"]
+stream = ExtResource( 5 )
+volume_db = 4.0
+bus = "Footsteps"
+
+[node name="DashAudioPlayer" parent="." instance=ExtResource( 4 )]
+numberToPlay = 1
+enablePitchRandomization = false
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="DashAudioPlayer"]
+stream = ExtResource( 14 )
+bus = "PlayerDash"
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="DashAudioPlayer"]
+stream = ExtResource( 14 )
+bus = "PlayerDash"
+
+[node name="CoyoteTimer" type="Timer" parent="."]
+wait_time = 0.15
+one_shot = true
+
+[node name="DashParticles" type="Particles2D" parent="."]
+show_behind_parent = true
+material = SubResource( 2 )
+position = Vector2( -0.00810909, -12.074 )
+emitting = false
+amount = 15
+lifetime = 0.4
+local_coords = false
+process_material = SubResource( 5 )
+texture = ExtResource( 2 )
+
+[node name="PickupArea" type="Area2D" parent="."]
+position = Vector2( 0, -1 )
+collision_layer = 524288
+collision_mask = 524288
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea"]
+position = Vector2( 0, -13.5153 )
+shape = SubResource( 6 )
+
+[node name="HazardArea" type="Area2D" parent="."]
+position = Vector2( -32, -2 )
+collision_layer = 0
+collision_mask = 327680
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HazardArea"]
+position = Vector2( 32, -12 )
+shape = SubResource( 7 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( -0.00688457, -0.0536397 )
+frames = SubResource( 8 )
+animation = "idle"
+playing = true
+offset = Vector2( 0, -12 )
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -0.0625, -12 )
+shape = SubResource( 9 )
+
+[node name="DashArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DashArea"]
+position = Vector2( 0, -13 )
+rotation = 1.57197
+scale = Vector2( 1.23953, 1 )
+shape = SubResource( 10 )

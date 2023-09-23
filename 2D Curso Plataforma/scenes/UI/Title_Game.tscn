@@ -1,0 +1,134 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://resources/pixeldub.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://scenes/UI/Title_Game.gd" type="Script" id=2]
+
+[sub_resource type="Animation" id=1]
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("VBoxContainer/MarginContainer:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 1, 1 ), Vector2( 0.9, 0.9 ), Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("VBoxContainer/MarginContainer2:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 1, 1 ), Vector2( 0.9, 0.9 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "Rotation"
+length = 8.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("VBoxContainer/MarginContainer:rect_rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 4, 4.9, 6, 7, 8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 5.0, -5.0, 5.0, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("VBoxContainer/MarginContainer2:rect_rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 4, 4.9, 6, 7, 8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 5.01316, -5.0, 5.01316, 0.0 ]
+}
+
+[sub_resource type="DynamicFont" id=3]
+size = 35
+outline_size = 2
+outline_color = Color( 0.184314, 0.282353, 0.270588, 1 )
+use_mipmaps = true
+use_filter = true
+extra_spacing_top = 1
+extra_spacing_bottom = 1
+extra_spacing_char = 1
+extra_spacing_space = 1
+font_data = ExtResource( 1 )
+
+[sub_resource type="Theme" id=4]
+default_font = SubResource( 3 )
+
+[node name="Title_Game" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Appear_Tittle" type="AnimationPlayer" parent="."]
+autoplay = "defaut"
+anims/defaut = SubResource( 1 )
+
+[node name="Title_Rotation" type="AnimationPlayer" parent="."]
+autoplay = "Rotation"
+anims/Rotation = SubResource( 2 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -83.5
+margin_top = -36.0
+margin_right = 83.5
+margin_bottom = 36.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+margin_right = 167.0
+margin_bottom = 34.0
+rect_pivot_offset = Vector2( 83, 17 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer"]
+margin_right = 167.0
+margin_bottom = 34.0
+rect_pivot_offset = Vector2( 156, 17 )
+theme = SubResource( 4 )
+custom_colors/font_color = Color( 0.52549, 0.964706, 0.733333, 1 )
+custom_colors/font_color_shadow = Color( 0.796078, 0.505882, 0.368627, 1 )
+text = "Craving"
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer"]
+margin_top = 38.0
+margin_right = 167.0
+margin_bottom = 72.0
+rect_pivot_offset = Vector2( 83, 17 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="VBoxContainer/MarginContainer2"]
+margin_right = 167.0
+margin_bottom = 34.0
+rect_pivot_offset = Vector2( 156, 17 )
+theme = SubResource( 4 )
+custom_colors/font_color = Color( 0.52549, 0.964706, 0.733333, 1 )
+custom_colors/font_color_shadow = Color( 0.796078, 0.505882, 0.368627, 1 )
+text = "Candy!"

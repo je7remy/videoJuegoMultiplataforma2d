@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/GameCamera.gd" type="Script" id=1]
+
+[sub_resource type="OpenSimplexNoise" id=1]
+seed = 7124
+
+[node name="GameCamera" type="Camera2D" groups=[
+"camera",
+]]
+rotation = -0.785397
+current = true
+script = ExtResource( 1 )
+backgroundcolor = Color( 0.87451, 0.964706, 0.960784, 1 )
+shakeNoise = SubResource( 1 )

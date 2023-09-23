@@ -1,0 +1,4 @@
+#Fri Nov 26 14:40:02 BOT 2021
+base.0=C\:\\2D Curso Plataforma\\android\\build\\build\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
+path.0=classes.dex
+renamed.0=classes.dex

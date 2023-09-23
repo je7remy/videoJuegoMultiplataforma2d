@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Competitive_-_Fired_Up.ogg-e90494d6bbe18b049b6eada79d68062c.oggstr"
+
+[deps]
+
+source_file="res://assets/music/Competitive_-_Fired_Up.ogg"
+dest_files=[ "res://.import/Competitive_-_Fired_Up.ogg-e90494d6bbe18b049b6eada79d68062c.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

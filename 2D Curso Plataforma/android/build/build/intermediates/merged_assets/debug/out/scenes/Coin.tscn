@@ -1,0 +1,139 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://assets/coin/tile_0151.png" type="Texture" id=1]
+[ext_resource path="res://assets/coin/tile_0152.png" type="Texture" id=2]
+[ext_resource path="res://assets/sounds/curated_sounds/glass_004.ogg" type="AudioStream" id=3]
+[ext_resource path="res://scenes/Coin.gd" type="Script" id=4]
+[ext_resource path="res://scenes/Util/RandomAudioStreamPlayer.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/sounds/impactGlass_heavy_001.ogg" type="AudioStream" id=6]
+[ext_resource path="res://assets/sounds/impactGlass_heavy_000.ogg" type="AudioStream" id=7]
+[ext_resource path="res://assets/sounds/impactGlass_heavy_003.ogg" type="AudioStream" id=8]
+[ext_resource path="res://assets/sounds/impactGlass_heavy_004.ogg" type="AudioStream" id=9]
+[ext_resource path="res://assets/sounds/impactGlass_heavy_002.ogg" type="AudioStream" id=10]
+
+[sub_resource type="Animation" id=1]
+resource_name = "idle"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -8 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "pickup"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -16 ), Vector2( 0, -20 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 0, 0 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.4 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "queue_free"
+} ]
+}
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 1 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "default",
+"speed": 7.0
+} ]
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 16.0
+
+[sub_resource type="GDScript" id=5]
+script/source = "extends CollisionShape2D
+"
+
+[node name="Coin" type="Node2D" groups=[
+"coin",
+]]
+script = ExtResource( 4 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "idle"
+anims/idle = SubResource( 1 )
+anims/pickup = SubResource( 2 )
+
+[node name="RandomAudioStreamPlayer" parent="." instance=ExtResource( 5 )]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="RandomAudioStreamPlayer"]
+stream = ExtResource( 3 )
+volume_db = -10.0
+
+[node name="RandomAudioStreamPlayer2" parent="." instance=ExtResource( 5 )]
+numberToPlay = 1
+minPitchScale = 0.8
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="RandomAudioStreamPlayer2"]
+stream = ExtResource( 7 )
+volume_db = -12.0
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="RandomAudioStreamPlayer2"]
+stream = ExtResource( 6 )
+volume_db = -12.0
+
+[node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="RandomAudioStreamPlayer2"]
+stream = ExtResource( 10 )
+volume_db = -12.0
+
+[node name="AudioStreamPlayer4" type="AudioStreamPlayer" parent="RandomAudioStreamPlayer2"]
+stream = ExtResource( 8 )
+volume_db = -12.0
+
+[node name="AudioStreamPlayer5" type="AudioStreamPlayer" parent="RandomAudioStreamPlayer2"]
+stream = ExtResource( 9 )
+volume_db = -12.0
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0, -16 )
+frames = SubResource( 3 )
+frame = 1
+playing = true
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 524288
+collision_mask = 524288
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 4 )
+script = SubResource( 5 )

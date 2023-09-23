@@ -1,0 +1,59 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://resources/tileset.tres" type="TileSet" id=1]
+[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/GameCamera.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/Coin.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/Spikes.tscn" type="PackedScene" id=5]
+
+[node name="Node" type="Node"]
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 18, 18 )
+format = 1
+tile_data = PoolIntArray( 12, 0, 0, 13, 0, 1, 14, 0, 1, 15, 0, 1, 16, 0, 1, 17, 0, 2, 131066, 0, 0, 131067, 0, 1, 131068, 0, 1, 131069, 0, 1, 131070, 0, 2, 65539, 0, 0, 65540, 0, 1, 65541, 0, 1, 65542, 0, 2, 65548, 0, 65536, 65549, 0, 65537, 65550, 0, 65537, 65551, 0, 65537, 65552, 0, 65537, 65553, 0, 65538, 196602, 0, 65536, 196603, 0, 65537, 196604, 0, 65537, 196605, 0, 65537, 196606, 0, 65539, 196607, 0, 2, 131075, 0, 65536, 131076, 0, 65537, 131077, 0, 65537, 131078, 0, 65538, 131083, 0, 0, 131084, 0, 65540, 131085, 0, 65537, 131086, 0, 65537, 131087, 0, 65537, 131088, 0, 65537, 131089, 0, 65538, 262138, 0, 65536, 262139, 0, 65537, 262140, 0, 65537, 262141, 0, 65537, 262142, 0, 3, 262143, 0, 131074, 196611, 0, 65536, 196612, 0, 65537, 196613, 0, 65537, 196614, 0, 65538, 196618, 0, 0, 196619, 0, 65540, 196620, 0, 65537, 196621, 0, 65537, 196622, 0, 3, 196623, 0, 131073, 196624, 0, 131073, 196625, 0, 131074, 327674, 0, 131072, 327675, 0, 131073, 327676, 0, 131073, 327677, 0, 131073, 327678, 0, 131074, 262147, 0, 131072, 262148, 0, 131073, 262149, 0, 131073, 262150, 0, 131074, 262154, 0, 65536, 262155, 0, 65537, 262156, 0, 65537, 262157, 0, 65537, 262158, 0, 65538, 327688, 0, 0, 327689, 0, 1, 327690, 0, 65540, 327691, 0, 65537, 327692, 0, 65537, 327693, 0, 65537, 327694, 0, 65538, 393224, 0, 65536, 393225, 0, 65537, 393226, 0, 65537, 393227, 0, 65537, 393228, 0, 65537, 393229, 0, 65537, 393230, 0, 65538, 458760, 0, 65536, 458761, 0, 65537, 458762, 0, 65537, 458763, 0, 65537, 458764, 0, 65537, 458765, 0, 3, 458766, 0, 131074, 524296, 0, 131072, 524297, 0, 4, 524298, 0, 65537, 524299, 0, 65537, 524300, 0, 3, 524301, 0, 131074, 589833, 0, 131072, 589834, 0, 131073, 589835, 0, 131073, 589836, 0, 131074 )
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( -52.0679, 11.799 )
+
+[node name="GameCamera" parent="." instance=ExtResource( 3 )]
+
+[node name="Coin" parent="." instance=ExtResource( 4 )]
+position = Vector2( 72, 9.46416 )
+
+[node name="Coin2" parent="." instance=ExtResource( 4 )]
+position = Vector2( 108, 9.46416 )
+
+[node name="Coin3" parent="." instance=ExtResource( 4 )]
+position = Vector2( 162, 11.799 )
+
+[node name="Coin4" parent="." instance=ExtResource( 4 )]
+position = Vector2( 207, 18.4642 )
+
+[node name="Coin5" parent="." instance=ExtResource( 4 )]
+position = Vector2( 243, -14.5358 )
+
+[node name="Coin6" parent="." instance=ExtResource( 4 )]
+position = Vector2( 279, -14.5358 )
+
+[node name="Coin7" parent="." instance=ExtResource( 4 )]
+position = Vector2( 315, -14.5358 )
+
+[node name="Spikes" parent="." instance=ExtResource( 5 )]
+position = Vector2( -9, 36 )
+
+[node name="Spikes2" parent="." instance=ExtResource( 5 )]
+position = Vector2( 54, 27 )
+rotation = -1.57079
+
+[node name="Spikes3" parent="." instance=ExtResource( 5 )]
+position = Vector2( 207, 36 )
+
+[node name="Spikes4" parent="." instance=ExtResource( 5 )]
+position = Vector2( 54, 63 )
+rotation = -1.57079
+
+[node name="Spikes5" parent="." instance=ExtResource( 5 )]
+position = Vector2( 54, 45 )
+rotation = -1.57079

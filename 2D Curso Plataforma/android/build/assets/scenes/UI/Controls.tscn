@@ -1,0 +1,74 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://assets/Sprites/shadedDark/shadedDark24.png" type="Texture" id=1]
+[ext_resource path="res://assets/Sprites/shadedDark/shadedDark25.png" type="Texture" id=2]
+[ext_resource path="res://assets/Sprites/shadedDark/shadedDark26.png" type="Texture" id=3]
+[ext_resource path="res://assets/Sprites/shadedDark/shadedDark49.png" type="Texture" id=4]
+[ext_resource path="res://assets/Sprites/shadedDark/shadedDark14.png" type="Texture" id=5]
+[ext_resource path="res://assets/Sprites/shadedLight/shadedLight25.png" type="Texture" id=6]
+[ext_resource path="res://assets/Sprites/shadedLight/shadedLight26.png" type="Texture" id=7]
+[ext_resource path="res://assets/Sprites/shadedLight/shadedLight49.png" type="Texture" id=9]
+[ext_resource path="res://assets/Sprites/shadedLight/shadedLight24.png" type="Texture" id=10]
+
+[node name="Controls" type="Node2D"]
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Direction" type="Node2D" parent="MarginContainer"]
+position = Vector2( 237, 137 )
+
+[node name="Left" type="TouchScreenButton" parent="MarginContainer/Direction"]
+modulate = Color( 1, 1, 1, 0.454902 )
+self_modulate = Color( 1, 1, 1, 0.847059 )
+position = Vector2( -236.831, 6.9756 )
+normal = ExtResource( 1 )
+pressed = ExtResource( 10 )
+passby_press = true
+action = "move_left"
+visibility_mode = 1
+
+[node name="Right" type="TouchScreenButton" parent="MarginContainer/Direction"]
+modulate = Color( 1, 1, 1, 0.454902 )
+self_modulate = Color( 1, 1, 1, 0.847059 )
+position = Vector2( -152.028, 7.0969 )
+normal = ExtResource( 2 )
+pressed = ExtResource( 6 )
+passby_press = true
+action = "move_right"
+visibility_mode = 1
+
+[node name="Dash" type="TouchScreenButton" parent="MarginContainer/Direction"]
+modulate = Color( 1, 1, 1, 0.454902 )
+self_modulate = Color( 1, 1, 1, 0.847059 )
+position = Vector2( 184.327, 126.838 )
+rotation = 3.14159
+normal = ExtResource( 4 )
+pressed = ExtResource( 9 )
+passby_press = true
+action = "dash"
+visibility_mode = 1
+
+[node name="Jump" type="TouchScreenButton" parent="MarginContainer/Direction"]
+modulate = Color( 1, 1, 1, 0.454902 )
+self_modulate = Color( 1, 1, 1, 0.847059 )
+position = Vector2( 103.736, -39.546 )
+normal = ExtResource( 3 )
+pressed = ExtResource( 7 )
+passby_press = true
+action = "jump"
+visibility_mode = 1
+
+[node name="Paused" type="TouchScreenButton" parent="MarginContainer/Direction"]
+pause_mode = 2
+modulate = Color( 1, 1, 1, 0.454902 )
+self_modulate = Color( 1, 1, 1, 0.847059 )
+position = Vector2( 192.057, -132.786 )
+normal = ExtResource( 5 )
+passby_press = true
+action = "pause"
+visibility_mode = 1

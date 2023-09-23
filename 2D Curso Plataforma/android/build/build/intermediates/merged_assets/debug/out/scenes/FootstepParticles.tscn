@@ -1,0 +1,87 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://assets/effects/particles.png" type="Texture" id=1]
+
+[sub_resource type="Animation" id=1]
+resource_name = "default"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Particles2D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("Particles2D")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "queue_free"
+} ]
+}
+
+[sub_resource type="CanvasItemMaterial" id=2]
+particles_animation = true
+particles_anim_h_frames = 3
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id=3]
+offsets = PoolRealArray( 0.534247, 1 )
+colors = PoolColorArray( 1, 1, 1, 0.862745, 1, 1, 1, 0.117647 )
+
+[sub_resource type="GradientTexture" id=4]
+gradient = SubResource( 3 )
+
+[sub_resource type="Curve" id=5]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.0950413, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.652893, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=6]
+curve = SubResource( 5 )
+
+[sub_resource type="ParticlesMaterial" id=7]
+lifetime_randomness = 0.5
+emission_shape = 1
+emission_sphere_radius = 1.0
+flag_disable_z = true
+direction = Vector3( 0, 1, 0 )
+gravity = Vector3( 0, -20, 0 )
+initial_velocity = 5.0
+initial_velocity_random = 1.0
+angular_velocity = 180.0
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+damping = 1.0
+scale = 1.5
+scale_curve = SubResource( 6 )
+color_ramp = SubResource( 4 )
+anim_offset = 1.0
+anim_offset_random = 1.0
+
+[node name="FootstepParticles" type="Node2D"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "default"
+anims/default = SubResource( 1 )
+
+[node name="Particles2D" type="Particles2D" parent="."]
+material = SubResource( 2 )
+emitting = false
+amount = 2
+lifetime = 1.5
+explosiveness = 0.9
+process_material = SubResource( 7 )
+texture = ExtResource( 1 )
