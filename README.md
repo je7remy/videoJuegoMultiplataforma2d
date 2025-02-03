@@ -91,4 +91,4 @@ MIT License - Ver [LICENSE](LICENSE) para detalles completos
 
 ---  
 
-*"El verdadero éxito en el desarrollo de juegos está en equilibrar creatividad, rendimiento y seguridad"* - Jérémy 
+*"El verdadero éxito en el desarrollo de juegos está en equilibrar creatividad, rendimiento y seguridad"* - Jeremy 
