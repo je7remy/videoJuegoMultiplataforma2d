@@ -87,7 +87,7 @@ Se aceptan mejoras en:
 - Documentación técnica  
 
 ## 📜 Licencia | License  
-MIT License - Ver [LICENSE](LICENSE) para detalles completos  
+MIT License - Ver [MIT](LICENSE) para detalles completos  
 
 ---  
 
